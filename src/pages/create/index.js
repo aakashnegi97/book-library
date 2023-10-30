@@ -12,16 +12,16 @@ const useStyles = makeStyles((theme) => ({
     ...commonStyles.dFAC,
   },
 }));
-const Update = (props) => {
+const Create = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const {} = props;
 
   return (
     <>
-      <Box className={clsx(classes.container)}>Update</Box>
+      <Box className={clsx(classes.container)}>Create</Box>
     </>
   );
 };
 
-export default Update;
+export default Create;

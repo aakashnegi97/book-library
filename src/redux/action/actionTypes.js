@@ -1,0 +1,2 @@
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+export const SET_BOOK_LIST = "SET_BOOK_LIST"
