@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 const BooksList = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const { getBooks, pagination } = props;
+  const { getBooks, setUpdateBook, pagination } = props;
   const books = pagination.books;
   const toggleList = [
     { name: "Ascending", value: "ASC" },
@@ -66,12 +66,17 @@ const BooksList = (props) => {
     e.persist();
     setSearch(e.target.value);
   };
-  const hangleToggle = (v) => {
-    getBooks({
-      sortDirection: v,
-      search: pagination?.search,
-      page: pagination?.currentPage,
-    });
+  const hangleToggle = (value) => {
+    if (value) {
+      getBooks({
+        sortDirection: value,
+        search: pagination?.search,
+        page: pagination?.currentPage,
+      });
+    }
+  };
+  const handleUpdateBook = (book) => {
+    setUpdateBook(book);
   };
   return (
     <>
@@ -105,7 +110,7 @@ const BooksList = (props) => {
               {books?.map((book, index) => {
                 return (
                   <Grid item xs={12} sm={4} lg={3} key={book.id}>
-                    <BookCard book={book} />
+                    <BookCard book={book} handleUpdateBook={handleUpdateBook} />
                   </Grid>
                 );
               })}
@@ -136,6 +141,7 @@ const mapStateToProps = ({ bookReducer }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getBooks: (request) => dispatch(callAction.getBooks(request)),
+    setUpdateBook: (request) => dispatch(callAction.setUpdateBook(request)),
   };
 };
 

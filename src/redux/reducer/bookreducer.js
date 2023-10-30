@@ -1,4 +1,8 @@
-import { SET_BOOK_LIST, SET_CURRENT_PAGE } from "../action/actionTypes";
+import {
+  SET_BOOK_LIST,
+  SET_CURRENT_PAGE,
+  SET_UPDATE_DATA,
+} from "../action/actionTypes";
 
 const initialState = {
   books: [],
@@ -8,6 +12,7 @@ const initialState = {
   totalElements: 0,
   sortDirection: "DESC",
   search: "",
+  updateBook: null,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -16,6 +21,8 @@ const reducer = (state = initialState, { type, payload }) => {
       return updateState(state, { ...(payload || {}) });
     case SET_BOOK_LIST:
       return updateState(state, { books: payload });
+    case SET_UPDATE_DATA:
+      return updateState(state, { updateBook: payload });
     default:
       return state;
   }

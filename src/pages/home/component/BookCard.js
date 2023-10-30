@@ -5,6 +5,7 @@ import { commonStyles } from "../../../utils/commonStyles";
 import CommonText from "../../../component/text/CommonText";
 import BoxButton from "../../../component/button/BoxButton";
 import EditIcon from "../../../component/icons/EditIcon";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,9 +31,15 @@ const useStyles = makeStyles((theme) => ({
 const BookCard = React.memo((props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const { book } = props;
+  const { book, handleUpdateBook } = props;
+  const history = useHistory();
   const handleLink = () => {
     window.open(book?.link || "");
+  };
+
+  const editHandler = () => {
+    handleUpdateBook(book);
+    history.push("/update");
   };
   return (
     <>
@@ -43,7 +50,10 @@ const BookCard = React.memo((props) => {
             xs={12}
             className={clsx(classes.dFJCAC, classes.titleContainer)}
           >
-            <EditIcon buttonClassName={classes.editIcon} />
+            <EditIcon
+              buttonClassName={classes.editIcon}
+              onClick={editHandler}
+            />
             <CommonText text={book?.title} type={1} />
           </Grid>
 

@@ -1,2 +1,5 @@
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 export const SET_BOOK_LIST = "SET_BOOK_LIST"
+export const SET_UPDATE_DATA = "SET_UPDATE_DATA"
+export const UPDATE_BOOK = "UPDATE_BOOK"
+export const CREATE_BOOK = "CREATE_BOOK"

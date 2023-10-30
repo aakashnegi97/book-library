@@ -20,6 +20,7 @@ const CommonTextField = (props) => {
       className={clsx(classes.commonStyle, className)}
       onChange={onChange}
       size={size}
+      fullWidth={true}
     />
   );
 };
