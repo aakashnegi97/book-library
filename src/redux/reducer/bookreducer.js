@@ -7,6 +7,7 @@ const initialState = {
   currentPage: 0,
   totalElements: 0,
   sortDirection: "DESC",
+  search: "",
 };
 
 const reducer = (state = initialState, { type, payload }) => {

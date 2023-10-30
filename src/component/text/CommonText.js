@@ -21,6 +21,11 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600  ",
     fontSize: "0.9rem  ",
   },
+  textStyle4: {
+    color: "#888",
+    fontWeight: "600  ",
+    fontSize: "0.7rem  ",
+  },
 }));
 const CommonText = (props) => {
   const theme = useTheme();
@@ -39,18 +44,6 @@ const CommonText = (props) => {
       break;
     case 4:
       style = classes.textStyle4;
-      break;
-    case 5:
-      style = classes.textStyle5;
-      break;
-    case 6:
-      style = classes.textStyle6;
-      break;
-    case 7:
-      style = classes.textStyle7;
-      break;
-    case 8:
-      style = classes.textStyle8;
       break;
     default:
       style = "";

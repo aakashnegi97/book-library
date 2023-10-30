@@ -7,6 +7,8 @@ import * as callAction from "../../../redux/action";
 import { connect } from "react-redux";
 import BookCard from "./BookCard";
 import PaginationComponent from "../../../component/pagination/Pagination";
+import CommonTextField from "../../../component/textfield/CommonTextField";
+import ToggleButtonComponent from "../../../component/button/ToggleButton";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,30 +24,74 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     maxWidth: "100%",
   },
+  searchStyle: {
+    width: "80%",
+  },
 }));
 const BooksList = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const { getBooks, pagination } = props;
   const books = pagination.books;
+  const toggleList = [
+    { name: "Ascending", value: "ASC" },
+    { name: "Descending", value: "DESC" },
+  ];
+
+  const isFirstLoad = React.useRef(true);
+  const [search, setSearch] = React.useState(pagination?.search || "");
+
   React.useEffect(() => {
     if (!pagination?.currentPage) {
       getBooks();
     }
   }, []);
+
+  React.useEffect(() => {
+    if (!isFirstLoad.current) {
+      const timeout = setTimeout(() => {
+        getBooks({ search: search });
+      }, 1000);
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+    isFirstLoad.current = false;
+  }, [search]);
+
   const handlePagination = (page) => {
-    getBooks({ page });
+    getBooks({ page, search: pagination?.search });
+  };
+  const handleSearch = (e) => {
+    e.persist();
+    setSearch(e.target.value);
+  };
+  const hangleToggle = (v) => {
+    getBooks({
+      sortDirection: v,
+      search: pagination?.search,
+      page: pagination?.currentPage,
+    });
   };
   return (
     <>
       <Box className={clsx(classes.container)}>
         <Box className={clsx(classes.filterContainer)}>
           <Grid container spacing={2}>
-            <Grid item xs={8}>
-              Search
+            <Grid item xs={8} className={classes.dFAC}>
+              <CommonTextField
+                label={"Search"}
+                onChange={handleSearch}
+                value={search}
+                className={classes.searchStyle}
+              />
             </Grid>
-            <Grid item xs={4}>
-              Sort
+            <Grid item xs={4} className={classes.dFAC}>
+              <ToggleButtonComponent
+                value={pagination?.sortDirection}
+                list={toggleList}
+                onChange={hangleToggle}
+              />
             </Grid>
           </Grid>
         </Box>

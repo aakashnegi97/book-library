@@ -18,7 +18,12 @@ const setCurrentPage = (data) => {
 export const getBooks = (request) => {
   return (dispatch, getState) => {
     const bookReducerData = getState().bookReducer;
-    let endpoint = `books?page=${request?.page || 1}&DIR=${request?.sortDirection || bookReducerData?.sortDirection}`;
+    let endpoint = `books?page=${request?.page || 1}&DIR=${
+      request?.sortDirection || bookReducerData?.sortDirection
+    }`;
+    if (request?.search) {
+      endpoint += "&title=" + request?.search;
+    }
     callApi(endpoint, "get")
       .then((res) => {
         const { pagination, data } = res.data;
@@ -29,6 +34,9 @@ export const getBooks = (request) => {
           pagination?.totalElements != bookReducerData?.totalElements ||
           pagination?.sortDirection != bookReducerData?.sortDirection
         ) {
+          if (request?.search) {
+            pagination.search = request?.search;
+          }
           dispatch(
             setCurrentPage({
               ...(pagination || {}),

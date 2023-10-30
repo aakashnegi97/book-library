@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     position: "sticky",
     top: 0,
     zIndex: 1,
+    borderRadius: 5,
   },
   dFAC: {
     ...commonStyles.dFAC,
