@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  useTheme,
-  Box,
-  makeStyles,
-  Typography,
-  Grid,
-  Button,
-} from "@material-ui/core";
+import { useTheme, Box, makeStyles, Grid } from "@material-ui/core";
 import clsx from "clsx";
 import { commonStyles } from "../../../utils/commonStyles";
 import CommonText from "../../../component/text/CommonText";
@@ -34,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
   },
 }));
-const BookCard = (props) => {
+const BookCard = React.memo((props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const { book } = props;
@@ -96,6 +89,6 @@ const BookCard = (props) => {
       </Box>
     </>
   );
-};
+});
 
 export default BookCard;

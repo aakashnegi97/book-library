@@ -9,13 +9,15 @@ import {
 } from "@material-ui/core";
 import clsx from "clsx";
 import { commonStyles } from "../../utils/commonStyles";
-import {useHistory} from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: "0.5rem",
     backgroundColor: "rgb(255, 115, 0)",
+    position: "sticky",
+    top: 0,
+    zIndex: 1,
   },
   dFAC: {
     ...commonStyles.dFAC,
@@ -40,7 +42,7 @@ function a11yProps(index) {
 const Header = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const history = useHistory()
+  const history = useHistory();
   const {} = props;
 
   const tabs = [
@@ -51,9 +53,7 @@ const Header = (props) => {
 
   const [selectedTab, setSelectedTab] = React.useState(0);
 
-  React.useEffect(() => {
-
-  },[])
+  React.useEffect(() => {}, []);
 
   const handleChange = (e, value) => {
     setSelectedTab(value);
