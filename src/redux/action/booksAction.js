@@ -1,13 +1,29 @@
 import callApi from "../../utils/api/api";
 import {
+  DELETE_NOTIFICATION,
   SET_BOOK_LIST,
   SET_CURRENT_PAGE,
+  SET_NOTIFICATION,
   SET_UPDATE_DATA,
 } from "./actionTypes";
 
 const setBookList = (data) => {
   return {
     type: SET_BOOK_LIST,
+    payload: data,
+  };
+};
+
+export const setNotification = (data) => {
+  return {
+    type: SET_NOTIFICATION,
+    payload: data,
+  };
+};
+
+export const deleteNotification = (data) => {
+  return {
+    type: DELETE_NOTIFICATION,
     payload: data,
   };
 };
@@ -50,7 +66,12 @@ export const getBooks = (request) => {
         dispatch(setBookList(data));
       })
       .catch((err) => {
-        console.log(err);
+        dispatch(
+          setNotification({
+            message: "Error while fetching books!",
+            type: "error",
+          })
+        );
       });
   };
 };
@@ -76,9 +97,14 @@ export const updateBooks = (request) => {
           })
         );
         dispatch(setUpdateBook(null));
+        dispatch(
+          setNotification({ message: "Updated successfully!", type: "success" })
+        );
       })
       .catch((err) => {
-        console.log(err);
+        dispatch(
+          setNotification({ message: "Error while updating!", type: "error" })
+        );
       });
   };
 };
@@ -96,9 +122,14 @@ export const createBook = (request) => {
             search: pagination?.search || "",
           })
         );
+        dispatch(
+          setNotification({ message: "Created successfully!", type: "success" })
+        );
       })
       .catch((err) => {
-        console.log(err);
+        dispatch(
+          setNotification({ message: "Error while creating!", type: "error" })
+        );
       });
   };
 };
