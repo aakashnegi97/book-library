@@ -21,12 +21,13 @@ const Update = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const history = useHistory();
-  const { updateData,booksLength, updateBook } = props;
+  const { updateData, setActiveTab, booksLength, updateBook } = props;
 
   React.useEffect(() => {
     if (!booksLength || !updateData) {
       history.push(config.routes.home.url);
     }
+    setActiveTab();
   }, []);
 
   const submitHandler = (values) => {
@@ -52,6 +53,7 @@ const mapStateToProps = ({ bookReducer }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateBook: (request) => dispatch(callAction.updateBooks(request)),
+    setActiveTab: () => dispatch(callAction.setActiveTab(0)),
   };
 };
 

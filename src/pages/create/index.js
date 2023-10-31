@@ -20,13 +20,17 @@ const Create = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const history = useHistory();
-  const { createBook } = props;
+  const { createBook, setActiveTab } = props;
 
   const submitHandler = (request) => {
     createBook(request).then(() => {
       history.push("/home");
     });
   };
+
+  React.useEffect(() => {
+    setActiveTab();
+  }, []);
   return (
     <>
       <Box className={clsx(classes.container, classes.dFJCAC)}>
@@ -42,6 +46,7 @@ const mapStateToProps = ({ bookReducer }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createBook: (request) => dispatch(callAction.createBook(request)),
+    setActiveTab: () => dispatch(callAction.setActiveTab(1)),
   };
 };
 

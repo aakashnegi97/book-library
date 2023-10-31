@@ -2,11 +2,19 @@ import callApi from "../../utils/api/api";
 import { config } from "../../utils/constants";
 import {
   DELETE_NOTIFICATION,
+  SET_ACTIVE_TAB,
   SET_BOOK_LIST,
   SET_CURRENT_PAGE,
   SET_NOTIFICATION,
   SET_UPDATE_DATA,
 } from "./actionTypes";
+
+export const setActiveTab = (data) => {
+    return {
+      type: SET_ACTIVE_TAB,
+      payload: data,
+    };
+  };
 
 const setBookList = (data) => {
   return {

@@ -11,6 +11,7 @@ import clsx from "clsx";
 import { commonStyles } from "../../utils/commonStyles";
 import { useHistory } from "react-router-dom";
 import { config } from "../../utils/constants";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -45,7 +46,7 @@ const Header = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const history = useHistory();
-  const {} = props;
+  const { activetab } = props;
 
   const tabs = [
     { label: config.tabs.bookList.label, route: config.routes.home.url },
@@ -54,21 +55,18 @@ const Header = (props) => {
 
   const [selectedTab, setSelectedTab] = React.useState(0);
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    setSelectedTab(activetab);
+  }, [activetab]);
 
   const handleChange = (e, value) => {
-    setSelectedTab(value);
     history.push(tabs[value].route);
   };
 
   return (
     <>
       <Box className={clsx(classes.container)}>
-        <Tabs
-          value={selectedTab}
-          onChange={handleChange}
-          indicatorColor=""
-        >
+        <Tabs value={selectedTab} onChange={handleChange} indicatorColor="">
           {tabs.map((tab, index) => {
             return (
               <Tab
@@ -89,5 +87,13 @@ const Header = (props) => {
     </>
   );
 };
+const mapStateToProps = ({ bookReducer }) => {
+  return {
+    activetab: bookReducer.activetab,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
 
-export default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,6 +1,7 @@
 import uuid from "react-uuid";
 import {
   DELETE_NOTIFICATION,
+  SET_ACTIVE_TAB,
   SET_BOOK_LIST,
   SET_CURRENT_PAGE,
   SET_NOTIFICATION,
@@ -17,10 +18,13 @@ const initialState = {
   search: "",
   updateBook: null,
   notifications: [],
+  activetab: 0,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case SET_ACTIVE_TAB:
+      return updateState(state, { activetab: payload });
     case SET_CURRENT_PAGE:
       return updateState(state, { ...(payload || {}) });
     case SET_BOOK_LIST:

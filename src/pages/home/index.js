@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { commonStyles } from "../../utils/commonStyles";
 import { connect } from "react-redux";
 import BooksList from "./component/BooksList";
+import * as callAction from "../../redux/action";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -17,7 +18,10 @@ const useStyles = makeStyles((theme) => ({
 const Home = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const {} = props;
+  const { setActiveTab } = props;
+  React.useEffect(() => {
+    setActiveTab();
+  }, []);
   return (
     <>
       <Box className={clsx(classes.container)}>
@@ -31,7 +35,9 @@ const mapStateToProps = ({}) => {
   return {};
 };
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    setActiveTab: () => dispatch(callAction.setActiveTab(0)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
