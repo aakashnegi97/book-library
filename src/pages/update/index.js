@@ -7,6 +7,7 @@ import BookForm from "../../component/form/BookForm";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as callAction from "../../redux/action";
+import { config } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -24,13 +25,13 @@ const Update = (props) => {
 
   React.useEffect(() => {
     if (!booksLength || !updateData) {
-      history.push("/home");
+      history.push(config.routes.home.url);
     }
   }, []);
 
   const submitHandler = (values) => {
     updateBook(values).then(() => {
-      history.push("/home");
+      history.push(config.routes.home.url);
     });
   };
 
