@@ -10,6 +10,7 @@ import {
 import clsx from "clsx";
 import { commonStyles } from "../../utils/commonStyles";
 import { useHistory } from "react-router-dom";
+import { config } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -47,9 +48,8 @@ const Header = (props) => {
   const {} = props;
 
   const tabs = [
-    { label: "Books List", route: "/home" },
-    // {label:"Update Book" , route:"update"},
-    { label: "Create Book", route: "/create" },
+    { label: config.tabs.bookList.label, route: config.routes.home.url },
+    { label: config.tabs.createBook.label, route: config.routes.create.url },
   ];
 
   const [selectedTab, setSelectedTab] = React.useState(0);
@@ -67,7 +67,6 @@ const Header = (props) => {
         <Tabs
           value={selectedTab}
           onChange={handleChange}
-          aria-label="simple tabs example"
           indicatorColor=""
         >
           {tabs.map((tab, index) => {

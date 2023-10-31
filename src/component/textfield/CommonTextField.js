@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
 const CommonTextField = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const { value, className, type, variant, onChange, size, label } = props;
+  const { value, className, type, variant, onChange, size, label, required } =
+    props;
   return (
     <TextField
       variant={variant}
@@ -21,6 +22,7 @@ const CommonTextField = (props) => {
       onChange={onChange}
       size={size}
       fullWidth={true}
+      required={required}
     />
   );
 };
@@ -32,5 +34,6 @@ CommonTextField.defaultProps = {
   type: "text",
   variant: "outlined",
   size: "small",
+  required: false,
 };
 export default CommonTextField;

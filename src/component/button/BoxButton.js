@@ -20,10 +20,11 @@ const useStyles = makeStyles((theme) => ({
 const BoxButton = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const { text, className, onClick, disabled } = props;
+  const { text, className, onClick, disabled, type } = props;
   const properties = {
     onClick,
     disabled,
+    type,
   };
   return (
     <>
@@ -35,6 +36,7 @@ const BoxButton = (props) => {
 };
 BoxButton.defaultProps = {
   className: "",
+  type: "",
   disabled: false,
   onClick: () => {},
 };

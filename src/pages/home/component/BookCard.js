@@ -6,6 +6,7 @@ import CommonText from "../../../component/text/CommonText";
 import BoxButton from "../../../component/button/BoxButton";
 import EditIcon from "../../../component/icons/EditIcon";
 import { useHistory } from "react-router-dom";
+import { config } from "../../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -39,7 +40,7 @@ const BookCard = React.memo((props) => {
 
   const editHandler = () => {
     handleUpdateBook(book);
-    history.push("/update");
+    history.push(config.routes.update.url);
   };
   return (
     <>
@@ -58,42 +59,42 @@ const BookCard = React.memo((props) => {
           </Grid>
 
           <Grid item xs={5} className={clsx(classes.dFAC)}>
-            <CommonText text={"Language: "} type={2} />
+            <CommonText text={config.bookCard.language} type={2} />
           </Grid>
           <Grid item xs={7} className={clsx(classes.dFJCAC)}>
             <CommonText text={book?.language} type={3} />
           </Grid>
 
           <Grid item xs={5} className={clsx(classes.dFAC)}>
-            <CommonText text={"Author: "} type={2} />
+            <CommonText text={config.bookCard.author} type={2} />
           </Grid>
           <Grid item xs={7} className={clsx(classes.dFJCAC)}>
             <CommonText text={book?.author} type={3} />
           </Grid>
 
           <Grid item xs={5} className={clsx(classes.dFAC)}>
-            <CommonText text={"Country: "} type={2} />
+            <CommonText text={config.bookCard.country} type={2} />
           </Grid>
           <Grid item xs={7} className={clsx(classes.dFJCAC)}>
             <CommonText text={book?.country} type={3} />
           </Grid>
 
           <Grid item xs={5} className={clsx(classes.dFAC)}>
-            <CommonText text={"Pages: "} type={2} />
+            <CommonText text={config.bookCard.pages} type={2} />
           </Grid>
           <Grid item xs={7} className={clsx(classes.dFJCAC)}>
             <CommonText text={book?.pages} type={3} />
           </Grid>
 
           <Grid item xs={5} className={clsx(classes.dFAC)}>
-            <CommonText text={"Year: "} type={2} />
+            <CommonText text={config.bookCard.year} type={2} />
           </Grid>
           <Grid item xs={7} className={clsx(classes.dFJCAC)}>
             <CommonText text={book?.year} type={3} />
           </Grid>
 
           <Grid item xs={12} className={clsx(classes.dFJCAC)}>
-            <BoxButton text={"Link"} onClick={handleLink} />
+            <BoxButton text={config.bookCard.link} onClick={handleLink} />
           </Grid>
         </Grid>
       </Box>

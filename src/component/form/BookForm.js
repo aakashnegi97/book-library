@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { commonStyles } from "../../utils/commonStyles";
 import CommonTextField from "../textfield/CommonTextField";
 import BoxButton from "../button/BoxButton";
+import { config } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,21 +19,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialFormState = {
-  title: "",
-  author: "",
-  country: "",
-  language: "",
-  link: "",
-  pages: "",
-  year: "",
-};
+const initialFormState = config.initialFormState;
 
 const BookForm = React.memo((props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const { fieldData, onSubmit } = props;
-  const submitButtonLabel = fieldData ? "UPDATE" : "CREATE";
+  const submitButtonLabel = config.formButtonText(fieldData);
 
   const [formData, setFormData] = React.useState({ ...initialFormState });
 
@@ -56,79 +49,83 @@ const BookForm = React.memo((props) => {
   };
 
   return (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        submitHandler();
+      }}
+    >
       <Box className={clsx(classes.container)}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <CommonTextField
-              label="Title"
+              {...config.form.title}
               value={formData.title}
               onChange={(e) => {
-                handleFormData(e, "title");
+                handleFormData(e, config.form.title.field);
               }}
             />
           </Grid>
           <Grid item xs={6}>
             <CommonTextField
-              label="Author"
+              {...config.form.author}
               value={formData.author}
               onChange={(e) => {
-                handleFormData(e, "author");
+                handleFormData(e, config.form.author.field);
               }}
             />
           </Grid>
           <Grid item xs={6}>
             <CommonTextField
-              label="Country"
+              {...config.form.country}
               value={formData.country}
               onChange={(e) => {
-                handleFormData(e, "country");
+                handleFormData(e, config.form.country.field);
               }}
             />
           </Grid>
           <Grid item xs={6}>
             <CommonTextField
-              label="Language"
+              {...config.form.language}
               value={formData.language}
               onChange={(e) => {
-                handleFormData(e, "language");
+                handleFormData(e, config.form.language.field);
               }}
             />
           </Grid>
           <Grid item xs={6}>
             <CommonTextField
-              label="Link"
+              {...config.form.link}
               value={formData.link}
               onChange={(e) => {
-                handleFormData(e, "link");
+                handleFormData(e, config.form.link.field);
               }}
             />
           </Grid>
           <Grid item xs={6}>
             <CommonTextField
-              label="Pages"
+              {...config.form.pages}
               value={formData.pages}
-              type="number"
               onChange={(e) => {
-                handleFormData(e, "pages");
+                handleFormData(e, config.form.pages.field);
               }}
             />
           </Grid>
           <Grid item xs={6}>
             <CommonTextField
-              label="Year"
+              {...config.form.year}
               value={formData.year}
               onChange={(e) => {
-                handleFormData(e, "year");
+                handleFormData(e, config.form.year.field);
               }}
             />
           </Grid>
           <Grid item xs={12}>
-            <BoxButton onClick={submitHandler} text={submitButtonLabel} />
+            <BoxButton type="submit" text={submitButtonLabel} />
           </Grid>
         </Grid>
       </Box>
-    </>
+    </form>
   );
 });
 
