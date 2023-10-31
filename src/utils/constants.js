@@ -85,4 +85,9 @@ export const config = {
       label: "Create Book",
     },
   },
+
+  toggleList: [
+    { name: "ASC", value: "ASC" },
+    { name: "DESC", value: "DESC" },
+  ],
 };

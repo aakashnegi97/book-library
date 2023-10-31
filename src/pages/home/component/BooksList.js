@@ -9,6 +9,7 @@ import BookCard from "./BookCard";
 import PaginationComponent from "../../../component/pagination/Pagination";
 import CommonTextField from "../../../component/textfield/CommonTextField";
 import ToggleButtonComponent from "../../../component/button/ToggleButton";
+import { config } from "../../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
   searchStyle: {
     width: "80%",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+    },
   },
 }));
 const BooksList = (props) => {
@@ -33,10 +37,6 @@ const BooksList = (props) => {
   const classes = useStyles(theme);
   const { getBooks, setUpdateBook, pagination } = props;
   const books = pagination.books;
-  const toggleList = [
-    { name: "Ascending", value: "ASC" },
-    { name: "Descending", value: "DESC" },
-  ];
 
   const isFirstLoad = React.useRef(true);
   const [search, setSearch] = React.useState(pagination?.search || "");
@@ -83,7 +83,7 @@ const BooksList = (props) => {
       <Box className={clsx(classes.container)}>
         <Box className={clsx(classes.filterContainer)}>
           <Grid container spacing={2}>
-            <Grid item xs={8} className={classes.dFAC}>
+            <Grid item xs={7} sm={8} className={classes.dFAC}>
               <CommonTextField
                 label={"Search"}
                 onChange={handleSearch}
@@ -91,10 +91,10 @@ const BooksList = (props) => {
                 className={classes.searchStyle}
               />
             </Grid>
-            <Grid item xs={4} className={classes.dFAC}>
+            <Grid item xs={5} sm={4} className={classes.dFAC}>
               <ToggleButtonComponent
                 value={pagination?.sortDirection}
-                list={toggleList}
+                list={config.toggleList}
                 onChange={hangleToggle}
               />
             </Grid>
