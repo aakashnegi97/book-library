@@ -1,4 +1,5 @@
 import callApi from "../../utils/api/api";
+import { config } from "../../utils/constants";
 import {
   DELETE_NOTIFICATION,
   SET_BOOK_LIST,
@@ -66,12 +67,7 @@ export const getBooks = (request) => {
         dispatch(setBookList(data));
       })
       .catch((err) => {
-        dispatch(
-          setNotification({
-            message: "Error while fetching books!",
-            type: "error",
-          })
-        );
+        dispatch(setNotification(config.notifyMessages.fetchError));
       });
   };
 };
@@ -97,14 +93,10 @@ export const updateBooks = (request) => {
           })
         );
         dispatch(setUpdateBook(null));
-        dispatch(
-          setNotification({ message: "Updated successfully!", type: "success" })
-        );
+        dispatch(setNotification(config.notifyMessages.updateSuccess));
       })
       .catch((err) => {
-        dispatch(
-          setNotification({ message: "Error while updating!", type: "error" })
-        );
+        dispatch(setNotification(config.notifyMessages.updateError));
       });
   };
 };
@@ -122,14 +114,10 @@ export const createBook = (request) => {
             search: pagination?.search || "",
           })
         );
-        dispatch(
-          setNotification({ message: "Created successfully!", type: "success" })
-        );
+        dispatch(setNotification(config.notifyMessages.createSuccess));
       })
       .catch((err) => {
-        dispatch(
-          setNotification({ message: "Error while creating!", type: "error" })
-        );
+        dispatch(setNotification(config.notifyMessages.createError));
       });
   };
 };

@@ -90,4 +90,18 @@ export const config = {
     { name: "ASC", value: "ASC" },
     { name: "DESC", value: "DESC" },
   ],
+
+  notifyMessages: {
+    createSuccess: {
+      message: "Created successfully!",
+      type: "success",
+    },
+    createError: { message: "Error while creating!", type: "error" },
+    updateSuccess: { message: "Updated successfully!", type: "success" },
+    updateError: { message: "Error while updating!", type: "error" },
+    fetchError: {
+      message: "Error while fetching books!",
+      type: "error",
+    },
+  },
 };
